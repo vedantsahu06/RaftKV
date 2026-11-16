@@ -1,9 +1,10 @@
-// Package wal implements WAL v1 framing and durable segment creation.
+// Package wal implements WAL v1 framing, durable segment creation and group
+// commit.
 //
-// This milestone establishes the on-disk format, segment filenames and the
-// creation protocol from docs/architecture/phase-1/WAL_DESIGN.md. Group commit,
-// sequence assignment, recovery scanning and record appends are intentionally
-// not part of this package yet.
+// The on-disk format, segment creation protocol, sequence assignment, batching,
+// one-write/one-Sync group commit and fail-stop behavior follow
+// docs/architecture/phase-1/WAL_DESIGN.md. Recovery scanning, rotation and
+// physical deletion are intentionally not part of this package yet.
 //
 // Only the dedicated WAL writer goroutine may own a Segment. The Segment
 // returned by CreateSegment is active only after the complete creation protocol
